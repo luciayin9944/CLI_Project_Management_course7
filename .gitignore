@@ -1,0 +1,9 @@
+# Virtual env metadata
+.venv
+env/
+venv/
+.env
+
+# cache
+__pycache__/
+.pytest_cache
