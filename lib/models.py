@@ -32,6 +32,13 @@ class User(Person):
     def get_all_users(cls):
         return cls.all
     
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email
+        }
+
     def __repr__(self):
         return f"User(id={self.id}, name='{self.name}', email='{self.email}')"
 
@@ -54,7 +61,7 @@ class Project:
     
     @user.setter
     def user(self, value):
-        if not isinstance(value, User):
+        if value is not None and not isinstance(value, User):
             raise TypeError("value must be an instance of User class")
         self._user = value
 
@@ -72,6 +79,15 @@ class Project:
     @classmethod
     def get_all_projects(cls):
         return cls.all
+    
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "description": self.description,
+            "due_date": self.due_date,
+            "user": self.user.name if self.user else None
+        }
     
     def __repr__(self):
         return f"Project(user='{self._user}', title='{self.title}', description='{self.description}', due_date='{self.due_date}')"
@@ -94,6 +110,13 @@ class Task:
     def get_all_tasks(cls):
         return cls.all
     
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "status": self.status,
+            "project": self.assigned_to.title if self.assigned_to else None
+        }
+    
     def __repr__(self):
         if self.assigned_to:  ##self.assigned_to is a Project instance!
             project_title = self.assigned_to.title  ##self.assigned_to.title is the Project instance's property
@@ -104,30 +127,30 @@ class Task:
 
 
 
-u1 = User("Alice", "alice@example.com")
-u2 = User("Bob", "bob@example.com")
+# u1 = User("Alice", "alice@example.com")
+# u2 = User("Bob", "bob@example.com")
 
-p1 = Project("Website", "Build landing page", "2025-06-10")
-p2 = Project("App", "Mobile app dev", "2025-07-01")
+# p1 = Project("Website", "Build landing page", "2025-06-10")
+# p2 = Project("App", "Mobile app dev", "2025-07-01")
 
-u1.add_project(p1)
-u2.add_project(p2)
+# u1.add_project(p1)
+# u2.add_project(p2)
 
-t1 = Task("Design UI")
-t2 = Task("Write backend")
+# t1 = Task("Design UI")
+# t2 = Task("Write backend")
 
-p1.add_task(t1)
-p1.add_task(t2)
+# p1.add_task(t1)
+# p1.add_task(t2)
 
-print(User.get_all_users())      
-print(Project.get_all_projects())  
-print(Task.get_all_tasks())      
+# print(User.get_all_users())      
+# print(Project.get_all_projects())  
+# print(Task.get_all_tasks())      
 
-"""
-[User(id=1, name='Alice', email='alice@example.com'), User(id=2, name='Bob', email='bob@example.com')]
+# """
+# [User(id=1, name='Alice', email='alice@example.com'), User(id=2, name='Bob', email='bob@example.com')]
 
-[Project(user='User(id=1, name='Alice', email='alice@example.com')', title='Website', description='Build landing page', due_date='2025-06-10'), 
-Project(user='User(id=2, name='Bob', email='bob@example.com')', title='App', description='Mobile app dev', due_date='2025-07-01')]
+# [Project(user='User(id=1, name='Alice', email='alice@example.com')', title='Website', description='Build landing page', due_date='2025-06-10'), 
+# Project(user='User(id=2, name='Bob', email='bob@example.com')', title='App', description='Mobile app dev', due_date='2025-07-01')]
 
-[Task(project='Website', title='Design UI', status='False'), Task(project='Website', title='Write backend', status='False')]
-"""
+# [Task(project='Website', title='Design UI', status='False'), Task(project='Website', title='Write backend', status='False')]
+# """

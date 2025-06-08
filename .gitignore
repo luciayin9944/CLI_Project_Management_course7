@@ -7,3 +7,8 @@ venv/
 # cache
 __pycache__/
 .pytest_cache
+
+
+# Ignore data files
+*.json
+data/
