@@ -1,9 +1,54 @@
 import argparse
 from lib.models import User, Project, Task
+from utils.helper import save_json, load_json
 
 users = {}
 projects = {}
 tasks = {}
+
+# Load data from JSON on startup
+def load_data():
+    users_data = load_json("users.json")
+    for u in users_data:
+        User(u["name"], u["email"])
+
+    projects_data = load_json("projects.json")
+    for p in projects_data:
+        project = Project(p["title"], p["description"], p["due_date"])
+        user = next((u for u in User.all if u.name == p["user"]), None)
+        if user:
+            user.add_project(project)
+
+    tasks_data = load_json("tasks.json")
+    for t in tasks_data:
+        task = Task(t["title"])
+        task.status = t["status"]
+        project = next((p for p in Project.all if p.title == t["project"]), None)
+        if project:
+            project.add_task(task)
+
+# Save data to JSON after each operation
+def save_data():
+    save_json("users.json", [vars(u) for u in User.all])
+    save_json("projects.json", [
+        {
+            "title": p.title,
+            "description": p.description,
+            "due_date": p.due_date,
+            "user": p.user.name if p.user else None
+        } for p in Project.all
+    ])
+    save_json("tasks.json", [
+        {
+            "title": t.title,
+            "status": t.status,
+            "project": t.assigned_to.title if t.assigned_to else None
+        } for t in Task.all
+    ])
+
+
+    
+
 
 def add_user(args):
     if args.name in users:
