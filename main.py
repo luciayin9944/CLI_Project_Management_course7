@@ -1,6 +1,7 @@
 import argparse
 from lib.models import User, Project, Task
 from utils.helper import save_json, load_json
+from utils.printer import success, error
 
 users = {}
 projects = {}
@@ -40,11 +41,14 @@ def save_data():
 
 def add_new_user(args):
     if args.name in users:
-        print(f"User '{args.name}' already exists.")
+        error(f"User '{args.name}' already exists.")
+        #print(f"User '{args.name}' already exists.")
+
         return
     user = User(args.name, args.email)
     users[args.name] = user
-    print(f"Added user: {user.name} with email {user.email}")
+    success(f"Added user: {user.name} with email {user.email}")
+    #print(f"Added user: {user.name} with email {user.email}")
     save_data()
 
 
@@ -56,13 +60,15 @@ def list_users(args):
 def add_new_project(args):
     user = users.get(args.user_name)
     if not user:
-        print(f"User '{args.user_name}' not found.")
+        error(f"User '{args.user_name}' not found.")
+        #print(f"User '{args.user_name}' not found.")
         return
     
     project = Project(args.title, args.description, args.due_date)
     user.add_project(project) ##calling User.add_project()
     projects[project.title] = project
-    print(f"Created project '{project.title}' for user '{user.name}'")
+    success(f"Created project '{project.title}' for user '{user.name}'")
+    # print(f"Created project '{project.title}' for user '{user.name}'")
     save_data()
 
 def list_projects(args):
@@ -73,23 +79,27 @@ def list_projects(args):
 def add_new_task(args):
     project = projects.get(args.project_title)
     if not project:
-        print(f"Project '{args.project_title}' not found.")
+        error(f"Project '{args.project_title}' not found.")
+        #print(f"Project '{args.project_title}' not found.")
         return
     
     task = Task(args.title)
     project.add_task(task)
     tasks[task.title] = task
-    print(f"Created task '{task.title}' and added to project '{project.title}'")
+    success(f"Created task '{task.title}' and added to project '{project.title}'")
+    #print(f"Created task '{task.title}' and added to project '{project.title}'")
     save_data()
 
 
 def update_task_status(args):
     task = tasks.get(args.title)
     if not task:
-        print(f"Task '{args.title}' not found.")
+        error(f"Task '{args.title}' not found.")
+        #print(f"Task '{args.title}' not found.")
         return
     task.mark_complete()
-    print(f"Marked task '{task.title}' as complete")
+    success(f"Marked task '{task.title}' as complete")
+    #print(f"Marked task '{task.title}' as complete")
     save_data()
 
 def list_tasks(args):
