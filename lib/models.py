@@ -104,30 +104,30 @@ class Task:
 
 
 
-u1 = User("Alice", "alice@example.com")
-u2 = User("Bob", "bob@example.com")
+# u1 = User("Alice", "alice@example.com")
+# u2 = User("Bob", "bob@example.com")
 
-p1 = Project("Website", "Build landing page", "2025-06-10")
-p2 = Project("App", "Mobile app dev", "2025-07-01")
+# p1 = Project("Website", "Build landing page", "2025-06-10")
+# p2 = Project("App", "Mobile app dev", "2025-07-01")
 
-u1.add_project(p1)
-u2.add_project(p2)
+# u1.add_project(p1)
+# u2.add_project(p2)
 
-t1 = Task("Design UI")
-t2 = Task("Write backend")
+# t1 = Task("Design UI")
+# t2 = Task("Write backend")
 
-p1.add_task(t1)
-p1.add_task(t2)
+# p1.add_task(t1)
+# p1.add_task(t2)
 
-print(User.get_all_users())      
-print(Project.get_all_projects())  
-print(Task.get_all_tasks())      
+# print(User.get_all_users())      
+# print(Project.get_all_projects())  
+# print(Task.get_all_tasks())      
 
-"""
-[User(id=1, name='Alice', email='alice@example.com'), User(id=2, name='Bob', email='bob@example.com')]
+# """
+# [User(id=1, name='Alice', email='alice@example.com'), User(id=2, name='Bob', email='bob@example.com')]
 
-[Project(user='User(id=1, name='Alice', email='alice@example.com')', title='Website', description='Build landing page', due_date='2025-06-10'), 
-Project(user='User(id=2, name='Bob', email='bob@example.com')', title='App', description='Mobile app dev', due_date='2025-07-01')]
+# [Project(user='User(id=1, name='Alice', email='alice@example.com')', title='Website', description='Build landing page', due_date='2025-06-10'), 
+# Project(user='User(id=2, name='Bob', email='bob@example.com')', title='App', description='Mobile app dev', due_date='2025-07-01')]
 
-[Task(project='Website', title='Design UI', status='False'), Task(project='Website', title='Write backend', status='False')]
-"""
+# [Task(project='Website', title='Design UI', status='False'), Task(project='Website', title='Write backend', status='False')]
+# """
