@@ -4,7 +4,9 @@ A simple command-line project management tool for developer teams. This tool all
 
 ## Features
 
-	•	Add and manage users
-	•	Assign projects to users
-	•	Create and update tasks under projects
-	•	Intuitive CLI commands for quick management
+•	Add and manage users
+•	Assign projects to users
+•	Create and update tasks under projects
+•	Intuitive CLI commands for quick management
+
+

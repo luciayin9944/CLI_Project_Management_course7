@@ -32,6 +32,13 @@ class User(Person):
     def get_all_users(cls):
         return cls.all
     
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "email": self.email
+        }
+
     def __repr__(self):
         return f"User(id={self.id}, name='{self.name}', email='{self.email}')"
 
@@ -54,7 +61,7 @@ class Project:
     
     @user.setter
     def user(self, value):
-        if not isinstance(value, User):
+        if value is not None and not isinstance(value, User):
             raise TypeError("value must be an instance of User class")
         self._user = value
 
@@ -72,6 +79,15 @@ class Project:
     @classmethod
     def get_all_projects(cls):
         return cls.all
+    
+
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "description": self.description,
+            "due_date": self.due_date,
+            "user": self.user.name if self.user else None
+        }
     
     def __repr__(self):
         return f"Project(user='{self._user}', title='{self.title}', description='{self.description}', due_date='{self.due_date}')"
@@ -93,6 +109,13 @@ class Task:
     @classmethod
     def get_all_tasks(cls):
         return cls.all
+    
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "status": self.status,
+            "project": self.assigned_to.title if self.assigned_to else None
+        }
     
     def __repr__(self):
         if self.assigned_to:  ##self.assigned_to is a Project instance!
