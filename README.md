@@ -11,8 +11,8 @@ A simple command-line project management tool for developer teams. This tool all
 
 ## Installation
     # Clone the repository
-    git clone https://github.com/your-username/cli-project-manager.git
-    cd cli-project-manager
+    git clone https://github.com/luciayin9944/CLI_Project_Management_course7.git
+    cd CLI_Project_Management_course7
 
     # Set up virtual environment
     python3 -m venv venv
@@ -35,3 +35,4 @@ Example CLI commands:
     python main.py list-projects
     python main.py list-tasks
     python main.py update-task-status "Create wireframes"
+    python main.py list-tasks
